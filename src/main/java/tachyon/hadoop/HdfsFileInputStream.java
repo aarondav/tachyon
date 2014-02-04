@@ -76,24 +76,21 @@ public class HdfsFileInputStream extends InputStream implements Seekable, Positi
   }
 
   /**
-   * Read upto the specified number of bytes, from a given position within a file, and return the
+   * Read up to the specified number of bytes, from a given position within a file, and return the
    * number of bytes read. This does not change the current offset of a file, and is thread-safe.
    */
   @Override
   public int read(long position, byte[] buffer, int offset, int length) throws IOException {
-    throw new IOException("Not supported");
-    // TODO Auto-generated method stub
-    //    return 0;
+    throw new UnsupportedOperationException();
   }
 
   /**
-   * Read number of bytes equalt to the length of the buffer, from a given position within a file.
+   * Read number of bytes equal to the length of the buffer, from a given position within a file.
    * This does not change the current offset of a file, and is thread-safe.
    */
   @Override
   public void readFully(long position, byte[] buffer) throws IOException {
-    // TODO Auto-generated method stub
-    throw new IOException("Not supported");
+    throw new UnsupportedOperationException();
   }
 
   /**
@@ -103,8 +100,7 @@ public class HdfsFileInputStream extends InputStream implements Seekable, Positi
   @Override
   public void readFully(long position, byte[] buffer, int offset, int length)
       throws IOException {
-    // TODO Auto-generated method stub
-    throw new IOException("Not supported");
+    throw new UnsupportedOperationException();
   }
 
   /**
@@ -142,9 +138,7 @@ public class HdfsFileInputStream extends InputStream implements Seekable, Positi
    */
   @Override
   public boolean seekToNewSource(long targetPos) throws IOException {
-    throw new IOException("Not supported");
-    // TODO Auto-generated method stub
-    //    return false;
+    throw new UnsupportedOperationException();
   }
 
   @Override
@@ -174,7 +168,7 @@ public class HdfsFileInputStream extends InputStream implements Seekable, Positi
 
   @Override
   public int read(byte b[]) throws IOException {
-    throw new IOException("Not supported");
+    return read(b, 0, b.length);
   }
 
   @Override
