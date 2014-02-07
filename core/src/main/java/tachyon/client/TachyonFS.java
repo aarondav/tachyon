@@ -1088,7 +1088,7 @@ public class TachyonFS {
    *          The id of the block.
    * @return filename on local file system or null if file not present on local file system.
    */
-  String getLocalFilename(long blockId) throws IOException {
+  public String getLocalFilename(long blockId) throws IOException {
     String rootFolder = getRootFolder();
     if (rootFolder != null) {
       String localFileName = CommonUtils.concat(rootFolder, blockId);
