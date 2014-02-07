@@ -339,4 +339,9 @@ public class TFS extends FileSystem {
       mWorkingDir = new Path(mWorkingDir, path);
     }
   }
+
+  /** Returns underlying TachyonFS instance. */
+  public TachyonFS getTachyonFS() {
+      return mTFS;
+  }
 }

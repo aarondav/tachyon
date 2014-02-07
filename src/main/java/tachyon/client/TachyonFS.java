@@ -911,9 +911,8 @@ public class TachyonFS {
     if (!lockBlock(blockId, blockLockId)) {
       return null;
     }
-    String rootFolder = getRootFolder();
-    if (rootFolder != null) {
-      String localFileName = rootFolder + Constants.PATH_SEPARATOR + blockId;
+    String localFileName = getLocalFilename(blockId);
+    if (localFileName != null) {
       try {
         RandomAccessFile localFile = new RandomAccessFile(localFileName, "r");
 
@@ -949,6 +948,25 @@ public class TachyonFS {
     }
 
     unlockBlock(blockId, blockLockId);
+    return null;
+  }
+
+  /**
+   * Returns the path to the local (memory cached) data stored in ramfs.
+   *
+   * The existence of this file is in no way guaranteed; the file may
+   * be evicted from the cache at any time.
+   *
+   * Use of this file should be limited in terms of access time. As Tachyon
+   * cannot actually evict an opened file (as the OS will not delete the data),
+   * pinning local files for extended periods of time can lead to Tachyon and
+   * system instability.
+   */
+  public String getLocalFilename(long blockId) throws IOException {
+    String rootFolder = getRootFolder();
+    if (rootFolder != null) {
+      return rootFolder + Constants.PATH_SEPARATOR + blockId;
+    }
     return null;
   }
 
