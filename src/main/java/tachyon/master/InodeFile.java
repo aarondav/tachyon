@@ -49,6 +49,10 @@ public class InodeFile extends Inode {
     mDependencyId = -1;
   }
 
+  public InodeFile(String name, int id, int parentId, long blockSizeByte, long creationTimeMs) {
+    this(name, id, parentId, blockSizeByte, creationTimeMs, true);
+  }
+
   public synchronized long getLength() {
     return mLength;
   }

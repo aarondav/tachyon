@@ -588,6 +588,11 @@ public class MasterInfo {
     return createFile(true, path, false, -1, null, blockSizeByte, cacheOnRead);
   }
 
+  public int createFile(String path, long blockSizeByte)
+      throws FileAlreadyExistException, InvalidPathException, BlockInfoException, TachyonException {
+    return createFile(true, path, false, -1, null, blockSizeByte, true);
+  }
+
   // TODO Make this API better.
   /**
    * Internal API.
