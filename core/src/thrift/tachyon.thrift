@@ -179,6 +179,9 @@ service MasterService {
   void user_completeFile(1: i32 fileId)
     throws (1: FileDoesNotExistException e)
 
+  void user_setFileLength(1: i32 fileId, 2: i64 fileLength)
+    throws (1: FileDoesNotExistException e)
+
   /**
    * Return -1 if does not contain the file, return fileId if it exists.
    */

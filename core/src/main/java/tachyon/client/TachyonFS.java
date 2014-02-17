@@ -148,7 +148,7 @@ public class TachyonFS {
    *          the local block's id
    * @throws IOException
    */
-  synchronized void accessLocalBlock(long blockId) throws IOException {
+  public synchronized void accessLocalBlock(long blockId) throws IOException {
     connect();
     if (mWorkerClient != null && mIsWorkerLocal) {
       try {
@@ -1767,6 +1767,16 @@ public class TachyonFS {
     connect();
     try {
       mMasterClient.user_updateRawTableMetadata(id, metadata);
+    } catch (TException e) {
+      mConnected = false;
+      throw new IOException(e);
+    }
+  }
+
+  public void setLength(int fileId, long fileSize) throws IOException {
+    connect();
+    try {
+      mMasterClient.user_setFileLength(fileId, fileSize);
     } catch (TException e) {
       mConnected = false;
       throw new IOException(e);

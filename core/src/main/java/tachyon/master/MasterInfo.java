@@ -937,6 +937,19 @@ public class MasterInfo extends ImageWriter {
     }
   }
 
+  public void setFileLength(int fid, long fileSizeBytes)
+    throws FileDoesNotExistException, SuspectedFileSizeException, BlockInfoException {
+    LOG.info("Set file length = " + fileSizeBytes);
+    synchronized (mRoot) {
+      InodeFile inode = (InodeFile) mInodes.get(fid);
+      if (inode == null) {
+        throw new FileDoesNotExistException("FileId " + fid + " does not exist.");
+      }
+
+      inode.setLength(fileSizeBytes);
+    }
+  }
+
   public int createFile(String path, long blockSizeByte) throws FileAlreadyExistException,
       InvalidPathException, BlockInfoException, TachyonException {
     return createFile(true, path, false, blockSizeByte);

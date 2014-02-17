@@ -70,7 +70,7 @@ public class LocalBlockInStream extends BlockInStream {
     if (b == null) {
       throw new NullPointerException();
     } else if (off < 0 || len < 0 || len > b.length - off) {
-      throw new IndexOutOfBoundsException();
+      throw new IndexOutOfBoundsException("Offset: " + off);
     } else if (len == 0) {
       return 0;
     }

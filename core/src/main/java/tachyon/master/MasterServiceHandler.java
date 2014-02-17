@@ -141,6 +141,12 @@ public class MasterServiceHandler implements MasterService.Iface {
   }
 
   @Override
+  public void user_setFileLength(int fileId, long fileSizeBytes)
+      throws FileDoesNotExistException, TException {
+    mMasterInfo.setFileLength(fileId, fileSizeBytes);
+  }
+
+  @Override
   public int user_createRawTable(String path, int columns, ByteBuffer metadata)
       throws FileAlreadyExistException, InvalidPathException, TableColumnException,
       TachyonException, TException {

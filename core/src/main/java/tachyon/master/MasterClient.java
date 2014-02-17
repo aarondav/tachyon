@@ -415,6 +415,27 @@ public class MasterClient {
     }
     return -1;
   }
+  public synchronized void user_setFileLength(int fileId, long fileSizeByte)
+      throws IOException, TException {
+    while (!mIsShutdown) {
+      connect();
+      try {
+        mClient.user_setFileLength(fileId, fileSizeByte);
+        return;
+      } catch (FileAlreadyExistException e) {
+        throw new IOException(e);
+      } catch (InvalidPathException e) {
+        throw new IOException(e);
+      } catch (BlockInfoException e) {
+        throw new IOException(e);
+      } catch (TachyonException e) {
+        throw new IOException(e);
+      } catch (TTransportException e) {
+        LOG.error(e.getMessage());
+        mIsConnected = false;
+      }
+    }
+  }
 
   public synchronized boolean user_delete(int fileId, boolean recursive) throws IOException,
       TException {

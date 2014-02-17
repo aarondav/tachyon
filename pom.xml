@@ -19,7 +19,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>edu.berkeley.cs.amplab</groupId>
   <artifactId>tachyon-parent</artifactId>
-  <version>0.5.0.6-internal-SNAPSHOT</version>
+  <version>0.5.0.9-internal-SNAPSHOT</version>
   <packaging>pom</packaging>
   <description>Tachyon Project Parent</description>
   <name>Tachyon Project Parent</name>
@@ -78,7 +78,7 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <java.version>1.6</java.version>
-    <hadoop.version>1.0.4</hadoop.version>
+    <hadoop.version>1.2.1</hadoop.version>
     <libthrift.version>0.9.0</libthrift.version>
     <cxf.version>2.7.0</cxf.version>
     <jetty.version>7.6.8.v20121106</jetty.version>

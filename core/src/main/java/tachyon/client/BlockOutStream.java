@@ -61,7 +61,7 @@ public class BlockOutStream extends OutStream {
    *          the index of the block in the file
    * @throws IOException
    */
-  BlockOutStream(TachyonFile file, WriteType opType, int blockIndex) throws IOException {
+  public BlockOutStream(TachyonFile file, WriteType opType, int blockIndex) throws IOException {
     super(file, opType);
 
     if (!opType.isCache()) {
