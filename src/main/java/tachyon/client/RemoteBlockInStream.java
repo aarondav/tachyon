@@ -62,6 +62,8 @@ public class RemoteBlockInStream extends BlockInStream {
 
     if (shouldCache) {
       mBlockOutStream = new BlockOutStream(file, WriteType.TRY_CACHE, blockIndex);
+    } else {
+      mRecache = false;
     }
 
     updateCurrentBuffer();
