@@ -193,17 +193,21 @@ public class Worker implements Runnable {
   }
 
   public static void main(String[] args) throws UnknownHostException {
-    if (args.length != 1) {
-      LOG.info("Usage: java -cp target/tachyon-" + Version.VERSION + "-jar-with-dependencies.jar " +
-          "tachyon.Worker <WorkerHost>");
-      System.exit(-1);
+    try {
+      if (args.length != 1) {
+        LOG.info("Usage: java -cp target/tachyon-" + Version.VERSION + "-jar-with-dependencies.jar " +
+            "tachyon.Worker <WorkerHost>");
+        System.exit(-1);
+      }
+      WorkerConf wConf = WorkerConf.get();
+      Worker worker = Worker.createWorker(wConf.MASTER_HOSTNAME + ":" + wConf.MASTER_PORT,
+          args[0] + ":" + wConf.PORT, wConf.DATA_PORT,
+          wConf.SELECTOR_THREADS, wConf.QUEUE_SIZE_PER_SELECTOR,
+          wConf.SERVER_THREADS, wConf.DATA_FOLDER, wConf.MEMORY_SIZE);
+      worker.start();
+    } catch (Exception e) {
+      LOG.error("Fatal exception occurred", e);
     }
-    WorkerConf wConf = WorkerConf.get();
-    Worker worker = Worker.createWorker(wConf.MASTER_HOSTNAME + ":" + wConf.MASTER_PORT,
-        args[0] + ":" + wConf.PORT, wConf.DATA_PORT,
-        wConf.SELECTOR_THREADS, wConf.QUEUE_SIZE_PER_SELECTOR,
-        wConf.SERVER_THREADS, wConf.DATA_FOLDER, wConf.MEMORY_SIZE);
-    worker.start();
   }
 
   /**
