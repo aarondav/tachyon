@@ -354,7 +354,7 @@ public class MasterServiceHandler implements MasterService.Iface {
 
   @Override
   public long worker_register(NetAddress workerNetAddress, long totalBytes, long usedBytes,
-      List<Long> currentBlockIds) throws BlockInfoException, TException {
-    return mMasterInfo.registerWorker(workerNetAddress, totalBytes, usedBytes, currentBlockIds);
+      List<Long> currentBlockIds, List<String> workerRemappings) throws BlockInfoException, TException {
+    return mMasterInfo.registerWorker(workerNetAddress, totalBytes, usedBytes, currentBlockIds, workerRemappings);
   }
 }

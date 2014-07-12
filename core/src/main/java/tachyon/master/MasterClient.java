@@ -886,12 +886,12 @@ public class MasterClient {
    * @throws TException
    */
   public synchronized long worker_register(NetAddress workerNetAddress, long totalBytes,
-      long usedBytes, List<Long> currentBlockList) throws BlockInfoException, TException {
+      long usedBytes, List<Long> currentBlockList, List<String> workerRemappings) throws BlockInfoException, TException {
     while (!mIsShutdown) {
       connect();
       try {
         long ret =
-            mClient.worker_register(workerNetAddress, totalBytes, usedBytes, currentBlockList);
+            mClient.worker_register(workerNetAddress, totalBytes, usedBytes, currentBlockList, workerRemappings);
         LOG.info("Registered at the master " + mMasterAddress + " from worker " + workerNetAddress
             + " , got WorkerId " + ret);
         return ret;

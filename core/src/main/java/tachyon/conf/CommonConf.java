@@ -15,10 +15,13 @@
 package tachyon.conf;
 
 import java.io.File;
+import java.util.List;
 
+import com.google.common.collect.Lists;
 import org.apache.log4j.Logger;
 
 import tachyon.Constants;
+import tachyon.thrift.NetAddress;
 
 /**
  * Configurations shared by master and workers.
@@ -67,6 +70,8 @@ public class CommonConf extends Utils {
 
   public final int MAX_TABLE_METADATA_BYTE;
 
+  public final List<String> ALTERNATE_IPS;
+
   private CommonConf() {
     if (System.getProperty("tachyon.home") == null) {
       LOG.warn("tachyon.home is not set. Using /mnt/tachyon_default_home as the default value.");
@@ -105,5 +110,7 @@ public class CommonConf extends Utils {
 
     MAX_COLUMNS = getIntProperty("tachyon.max.columns", 1000);
     MAX_TABLE_METADATA_BYTE = getIntProperty("tachyon.max.table.metadata.byte", Constants.MB * 5);
+
+    ALTERNATE_IPS = Lists.newArrayList(getProperty("tachyon.alternate.ips", "").split(","));
   }
 }

@@ -135,7 +135,7 @@ service MasterService {
    * @return value rv % 100,000 is really workerId, rv / 1000,000 is master started time.
    */
   i64 worker_register(1: NetAddress workerNetAddress, 2: i64 totalBytes, 3: i64 usedBytes,
-      4: list<i64> currentBlocks)
+      4: list<i64> currentBlocks, 5: list<string> workerRemappings)
     throws (1: BlockInfoException e)
 
   Command worker_heartbeat(1: i64 workerId, 2: i64 usedBytes, 3: list<i64> removedBlocks)

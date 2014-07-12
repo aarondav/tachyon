@@ -299,7 +299,7 @@ public class WorkerStorage {
             mWorkerAddress.getAddress().getCanonicalHostName(), mWorkerAddress.getPort());
         mWorkerId =
             mMasterClient.worker_register(canonicalAddress, mWorkerSpaceCounter.getCapacityBytes(),
-                0, new ArrayList<Long>());
+                0, new ArrayList<Long>(), COMMON_CONF.ALTERNATE_IPS);
       } catch (BlockInfoException e) {
         LOG.error(e.getMessage(), e);
         mWorkerId = 0;
@@ -641,7 +641,7 @@ public class WorkerStorage {
             mWorkerAddress.getAddress().getCanonicalHostName(), mWorkerAddress.getPort());
         id =
             mMasterClient.worker_register(canonicalAddress, mWorkerSpaceCounter.getCapacityBytes(),
-                0, new ArrayList<Long>(mMemoryData));
+                0, new ArrayList<Long>(mMemoryData), COMMON_CONF.ALTERNATE_IPS);
       } catch (BlockInfoException e) {
         LOG.error(e.getMessage(), e);
         id = 0;

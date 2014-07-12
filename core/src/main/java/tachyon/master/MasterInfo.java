@@ -38,6 +38,7 @@ import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.google.common.base.Optional;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import org.apache.log4j.Logger;
 
 import tachyon.Constants;
@@ -251,6 +252,7 @@ public class MasterInfo extends ImageWriter {
   private Map<Long, MasterWorkerInfo> mWorkers = new HashMap<Long, MasterWorkerInfo>();
 
   private Map<InetSocketAddress, Long> mWorkerAddressToId = new HashMap<InetSocketAddress, Long>();
+  private Map<NetAddress, List<String>> mWorkerAddressToRemappings = Maps.newHashMap();
 
   private BlockingQueue<MasterWorkerInfo> mLostWorkers = new ArrayBlockingQueue<MasterWorkerInfo>(
       32);
@@ -863,8 +865,10 @@ public class MasterInfo extends ImageWriter {
       }
 
       InetSocketAddress address = tWorkerInfo.ADDRESS;
-      tFile.addLocation(blockIndex, workerId, new NetAddress(address.getAddress()
-          .getCanonicalHostName(), address.getPort()));
+      NetAddress netAddress = new NetAddress(address.getAddress().getCanonicalHostName(), address.getPort());
+      List<String> remappings = mWorkerAddressToRemappings.get(netAddress);
+      LOG.info("Using remapping from " + netAddress + " => " + remappings);
+      tFile.addLocation(blockIndex, workerId, netAddress, remappings);
 
       if (tFile.hasCheckpointed()) {
         return -1;
@@ -1953,7 +1957,7 @@ public class MasterInfo extends ImageWriter {
    * @throws BlockInfoException
    */
   public long registerWorker(NetAddress workerNetAddress, long totalBytes, long usedBytes,
-      List<Long> currentBlockIds) throws BlockInfoException {
+      List<Long> currentBlockIds, List<String> workerRemappings) throws BlockInfoException {
     long id = 0;
     InetSocketAddress workerAddress =
         new InetSocketAddress(workerNetAddress.mHost, workerNetAddress.mPort);
@@ -1978,6 +1982,7 @@ public class MasterInfo extends ImageWriter {
       tWorkerInfo.updateLastUpdatedTimeMs();
       mWorkers.put(id, tWorkerInfo);
       mWorkerAddressToId.put(workerAddress, id);
+      mWorkerAddressToRemappings.put(workerNetAddress, workerRemappings);
       LOG.info("registerWorker(): " + tWorkerInfo);
     }
 
@@ -1987,7 +1992,7 @@ public class MasterInfo extends ImageWriter {
         int blockIndex = BlockInfo.computeBlockIndex(blockId);
         Inode inode = mInodes.get(fileId);
         if (inode != null && inode.isFile()) {
-          ((InodeFile) inode).addLocation(blockIndex, id, workerNetAddress);
+          ((InodeFile) inode).addLocation(blockIndex, id, workerNetAddress, workerRemappings);
         } else {
           LOG.warn("registerWorker failed to add fileId " + fileId + " blockIndex " + blockIndex);
         }
@@ -2263,7 +2268,7 @@ public class MasterInfo extends ImageWriter {
   /**
    * Create an image of the dependencies and filesystem tree.
    * 
-   * @param os
+   * @param dos
    *          The output stream to write the image to
    */
   @Override

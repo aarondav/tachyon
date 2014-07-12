@@ -21,6 +21,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.google.common.collect.Maps;
+import org.apache.log4j.Logger;
+import tachyon.Constants;
 import tachyon.Pair;
 import tachyon.UnderFileSystem;
 import tachyon.thrift.ClientBlockInfo;
@@ -53,7 +56,10 @@ public class BlockInfo {
 
   public final long LENGTH;
 
+  private final Logger LOG = Logger.getLogger(Constants.LOGGER_TYPE);
+
   private Map<Long, NetAddress> mLocations = new HashMap<Long, NetAddress>(5);
+  private Map<NetAddress, List<String>> mRemapping = Maps.newHashMap();
 
   /**
    * @param inodeFile
@@ -69,8 +75,11 @@ public class BlockInfo {
     LENGTH = length;
   }
 
-  public synchronized void addLocation(long workerId, NetAddress workerAddress) {
+  public synchronized void addLocation(long workerId, NetAddress workerAddress, List<String> remappings) {
     mLocations.put(workerId, workerAddress);
+    if (remappings != null) {
+      mRemapping.put(workerAddress, remappings);
+    }
   }
 
   public synchronized ClientBlockInfo generateClientBlockInfo() {
@@ -99,6 +108,14 @@ public class BlockInfo {
   public synchronized List<NetAddress> getLocations() {
     List<NetAddress> ret = new ArrayList<NetAddress>(mLocations.size());
     ret.addAll(mLocations.values());
+    for (NetAddress loc: mLocations.values()) {
+      ret.add(loc);
+      if (mRemapping.containsKey(loc)) {
+        for (String host: mRemapping.get(loc)) {
+          ret.add(new NetAddress(host, loc.getMPort()));
+        }
+      }
+    }
     if (ret.isEmpty() && INODE_FILE.hasCheckpointed()) {
       UnderFileSystem ufs = UnderFileSystem.get(INODE_FILE.getUfsPath());
       List<String> locs = null;
@@ -119,6 +136,7 @@ public class BlockInfo {
         }
       }
     }
+    LOG.info("Returning BlockLocations of " + ret + " given raw locations " + mLocations.values());
     return ret;
   }
 

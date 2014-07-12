@@ -112,10 +112,15 @@ public class InodeFile extends Inode {
 
   public synchronized void addLocation(int blockIndex, long workerId, NetAddress workerAddress)
       throws BlockInfoException {
+    addLocation(blockIndex, workerId, workerAddress, null);
+  }
+
+  public synchronized void addLocation(int blockIndex, long workerId, NetAddress workerAddress, List<String> remappings)
+      throws BlockInfoException {
     if (blockIndex < 0 || blockIndex >= mBlocks.size()) {
       throw new BlockInfoException("BlockIndex " + blockIndex + " out of bounds." + toString());
     }
-    mBlocks.get(blockIndex).addLocation(workerId, workerAddress);
+    mBlocks.get(blockIndex).addLocation(workerId, workerAddress, remappings);
   }
 
   @Override
