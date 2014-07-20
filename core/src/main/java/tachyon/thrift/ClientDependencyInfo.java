@@ -620,13 +620,13 @@ public class ClientDependencyInfo implements org.apache.thrift.TBase<ClientDepen
           case 2: // PARENTS
             if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
               {
-                org.apache.thrift.protocol.TList _list16 = iprot.readListBegin();
-                struct.parents = new ArrayList<Integer>(_list16.size);
-                for (int _i17 = 0; _i17 < _list16.size; ++_i17)
+                org.apache.thrift.protocol.TList _list24 = iprot.readListBegin();
+                struct.parents = new ArrayList<Integer>(_list24.size);
+                for (int _i25 = 0; _i25 < _list24.size; ++_i25)
                 {
-                  int _elem18; // required
-                  _elem18 = iprot.readI32();
-                  struct.parents.add(_elem18);
+                  int _elem26; // required
+                  _elem26 = iprot.readI32();
+                  struct.parents.add(_elem26);
                 }
                 iprot.readListEnd();
               }
@@ -638,13 +638,13 @@ public class ClientDependencyInfo implements org.apache.thrift.TBase<ClientDepen
           case 3: // CHILDREN
             if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
               {
-                org.apache.thrift.protocol.TList _list19 = iprot.readListBegin();
-                struct.children = new ArrayList<Integer>(_list19.size);
-                for (int _i20 = 0; _i20 < _list19.size; ++_i20)
+                org.apache.thrift.protocol.TList _list27 = iprot.readListBegin();
+                struct.children = new ArrayList<Integer>(_list27.size);
+                for (int _i28 = 0; _i28 < _list27.size; ++_i28)
                 {
-                  int _elem21; // required
-                  _elem21 = iprot.readI32();
-                  struct.children.add(_elem21);
+                  int _elem29; // required
+                  _elem29 = iprot.readI32();
+                  struct.children.add(_elem29);
                 }
                 iprot.readListEnd();
               }
@@ -656,13 +656,13 @@ public class ClientDependencyInfo implements org.apache.thrift.TBase<ClientDepen
           case 4: // DATA
             if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
               {
-                org.apache.thrift.protocol.TList _list22 = iprot.readListBegin();
-                struct.data = new ArrayList<ByteBuffer>(_list22.size);
-                for (int _i23 = 0; _i23 < _list22.size; ++_i23)
+                org.apache.thrift.protocol.TList _list30 = iprot.readListBegin();
+                struct.data = new ArrayList<ByteBuffer>(_list30.size);
+                for (int _i31 = 0; _i31 < _list30.size; ++_i31)
                 {
-                  ByteBuffer _elem24; // required
-                  _elem24 = iprot.readBinary();
-                  struct.data.add(_elem24);
+                  ByteBuffer _elem32; // required
+                  _elem32 = iprot.readBinary();
+                  struct.data.add(_elem32);
                 }
                 iprot.readListEnd();
               }
@@ -693,9 +693,9 @@ public class ClientDependencyInfo implements org.apache.thrift.TBase<ClientDepen
         oprot.writeFieldBegin(PARENTS_FIELD_DESC);
         {
           oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.I32, struct.parents.size()));
-          for (int _iter25 : struct.parents)
+          for (int _iter33 : struct.parents)
           {
-            oprot.writeI32(_iter25);
+            oprot.writeI32(_iter33);
           }
           oprot.writeListEnd();
         }
@@ -705,9 +705,9 @@ public class ClientDependencyInfo implements org.apache.thrift.TBase<ClientDepen
         oprot.writeFieldBegin(CHILDREN_FIELD_DESC);
         {
           oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.I32, struct.children.size()));
-          for (int _iter26 : struct.children)
+          for (int _iter34 : struct.children)
           {
-            oprot.writeI32(_iter26);
+            oprot.writeI32(_iter34);
           }
           oprot.writeListEnd();
         }
@@ -717,9 +717,9 @@ public class ClientDependencyInfo implements org.apache.thrift.TBase<ClientDepen
         oprot.writeFieldBegin(DATA_FIELD_DESC);
         {
           oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, struct.data.size()));
-          for (ByteBuffer _iter27 : struct.data)
+          for (ByteBuffer _iter35 : struct.data)
           {
-            oprot.writeBinary(_iter27);
+            oprot.writeBinary(_iter35);
           }
           oprot.writeListEnd();
         }
@@ -762,27 +762,27 @@ public class ClientDependencyInfo implements org.apache.thrift.TBase<ClientDepen
       if (struct.isSetParents()) {
         {
           oprot.writeI32(struct.parents.size());
-          for (int _iter28 : struct.parents)
+          for (int _iter36 : struct.parents)
           {
-            oprot.writeI32(_iter28);
+            oprot.writeI32(_iter36);
           }
         }
       }
       if (struct.isSetChildren()) {
         {
           oprot.writeI32(struct.children.size());
-          for (int _iter29 : struct.children)
+          for (int _iter37 : struct.children)
           {
-            oprot.writeI32(_iter29);
+            oprot.writeI32(_iter37);
           }
         }
       }
       if (struct.isSetData()) {
         {
           oprot.writeI32(struct.data.size());
-          for (ByteBuffer _iter30 : struct.data)
+          for (ByteBuffer _iter38 : struct.data)
           {
-            oprot.writeBinary(_iter30);
+            oprot.writeBinary(_iter38);
           }
         }
       }
@@ -798,39 +798,39 @@ public class ClientDependencyInfo implements org.apache.thrift.TBase<ClientDepen
       }
       if (incoming.get(1)) {
         {
-          org.apache.thrift.protocol.TList _list31 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.I32, iprot.readI32());
-          struct.parents = new ArrayList<Integer>(_list31.size);
-          for (int _i32 = 0; _i32 < _list31.size; ++_i32)
+          org.apache.thrift.protocol.TList _list39 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.I32, iprot.readI32());
+          struct.parents = new ArrayList<Integer>(_list39.size);
+          for (int _i40 = 0; _i40 < _list39.size; ++_i40)
           {
-            int _elem33; // required
-            _elem33 = iprot.readI32();
-            struct.parents.add(_elem33);
+            int _elem41; // required
+            _elem41 = iprot.readI32();
+            struct.parents.add(_elem41);
           }
         }
         struct.setParentsIsSet(true);
       }
       if (incoming.get(2)) {
         {
-          org.apache.thrift.protocol.TList _list34 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.I32, iprot.readI32());
-          struct.children = new ArrayList<Integer>(_list34.size);
-          for (int _i35 = 0; _i35 < _list34.size; ++_i35)
+          org.apache.thrift.protocol.TList _list42 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.I32, iprot.readI32());
+          struct.children = new ArrayList<Integer>(_list42.size);
+          for (int _i43 = 0; _i43 < _list42.size; ++_i43)
           {
-            int _elem36; // required
-            _elem36 = iprot.readI32();
-            struct.children.add(_elem36);
+            int _elem44; // required
+            _elem44 = iprot.readI32();
+            struct.children.add(_elem44);
           }
         }
         struct.setChildrenIsSet(true);
       }
       if (incoming.get(3)) {
         {
-          org.apache.thrift.protocol.TList _list37 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, iprot.readI32());
-          struct.data = new ArrayList<ByteBuffer>(_list37.size);
-          for (int _i38 = 0; _i38 < _list37.size; ++_i38)
+          org.apache.thrift.protocol.TList _list45 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, iprot.readI32());
+          struct.data = new ArrayList<ByteBuffer>(_list45.size);
+          for (int _i46 = 0; _i46 < _list45.size; ++_i46)
           {
-            ByteBuffer _elem39; // required
-            _elem39 = iprot.readBinary();
-            struct.data.add(_elem39);
+            ByteBuffer _elem47; // required
+            _elem47 = iprot.readBinary();
+            struct.data.add(_elem47);
           }
         }
         struct.setDataIsSet(true);

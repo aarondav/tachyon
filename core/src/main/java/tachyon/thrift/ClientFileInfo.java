@@ -1392,13 +1392,13 @@ public class ClientFileInfo implements org.apache.thrift.TBase<ClientFileInfo, C
           case 12: // BLOCK_IDS
             if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
               {
-                org.apache.thrift.protocol.TList _list8 = iprot.readListBegin();
-                struct.blockIds = new ArrayList<Long>(_list8.size);
-                for (int _i9 = 0; _i9 < _list8.size; ++_i9)
+                org.apache.thrift.protocol.TList _list16 = iprot.readListBegin();
+                struct.blockIds = new ArrayList<Long>(_list16.size);
+                for (int _i17 = 0; _i17 < _list16.size; ++_i17)
                 {
-                  long _elem10; // required
-                  _elem10 = iprot.readI64();
-                  struct.blockIds.add(_elem10);
+                  long _elem18; // required
+                  _elem18 = iprot.readI64();
+                  struct.blockIds.add(_elem18);
                 }
                 iprot.readListEnd();
               }
@@ -1481,9 +1481,9 @@ public class ClientFileInfo implements org.apache.thrift.TBase<ClientFileInfo, C
         oprot.writeFieldBegin(BLOCK_IDS_FIELD_DESC);
         {
           oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.I64, struct.blockIds.size()));
-          for (long _iter11 : struct.blockIds)
+          for (long _iter19 : struct.blockIds)
           {
-            oprot.writeI64(_iter11);
+            oprot.writeI64(_iter19);
           }
           oprot.writeListEnd();
         }
@@ -1592,9 +1592,9 @@ public class ClientFileInfo implements org.apache.thrift.TBase<ClientFileInfo, C
       if (struct.isSetBlockIds()) {
         {
           oprot.writeI32(struct.blockIds.size());
-          for (long _iter12 : struct.blockIds)
+          for (long _iter20 : struct.blockIds)
           {
-            oprot.writeI64(_iter12);
+            oprot.writeI64(_iter20);
           }
         }
       }
@@ -1656,13 +1656,13 @@ public class ClientFileInfo implements org.apache.thrift.TBase<ClientFileInfo, C
       }
       if (incoming.get(11)) {
         {
-          org.apache.thrift.protocol.TList _list13 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.I64, iprot.readI32());
-          struct.blockIds = new ArrayList<Long>(_list13.size);
-          for (int _i14 = 0; _i14 < _list13.size; ++_i14)
+          org.apache.thrift.protocol.TList _list21 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.I64, iprot.readI32());
+          struct.blockIds = new ArrayList<Long>(_list21.size);
+          for (int _i22 = 0; _i22 < _list21.size; ++_i22)
           {
-            long _elem15; // required
-            _elem15 = iprot.readI64();
-            struct.blockIds.add(_elem15);
+            long _elem23; // required
+            _elem23 = iprot.readI64();
+            struct.blockIds.add(_elem23);
           }
         }
         struct.setBlockIdsIsSet(true);

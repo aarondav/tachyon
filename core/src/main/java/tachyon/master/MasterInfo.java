@@ -18,6 +18,7 @@ import java.io.DataOutputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.InetSocketAddress;
+import java.net.UnknownHostException;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -68,6 +69,7 @@ import tachyon.thrift.TableColumnException;
 import tachyon.thrift.TableDoesNotExistException;
 import tachyon.thrift.TachyonException;
 import tachyon.util.CommonUtils;
+import tachyon.util.NetworkUtils;
 
 /**
  * A global view of filesystem in master.
@@ -1982,7 +1984,17 @@ public class MasterInfo extends ImageWriter {
       tWorkerInfo.updateLastUpdatedTimeMs();
       mWorkers.put(id, tWorkerInfo);
       mWorkerAddressToId.put(workerAddress, id);
-      mWorkerAddressToRemappings.put(workerNetAddress, workerRemappings);
+
+      List<String> canonicalRemappings = Lists.newArrayList();
+      for (String mapping: workerRemappings) {
+        try {
+          canonicalRemappings.add(NetworkUtils.resolveHostName(mapping));
+        } catch (UnknownHostException e) {
+          LOG.warn("Could not resolve host name: " + mapping);
+          canonicalRemappings.add(mapping);
+        }
+      }
+      mWorkerAddressToRemappings.put(workerNetAddress, canonicalRemappings);
       LOG.info("registerWorker(): " + tWorkerInfo);
     }
 

@@ -37,6 +37,7 @@ public class ClientBlockInfo implements org.apache.thrift.TBase<ClientBlockInfo,
   private static final org.apache.thrift.protocol.TField OFFSET_FIELD_DESC = new org.apache.thrift.protocol.TField("offset", org.apache.thrift.protocol.TType.I64, (short)2);
   private static final org.apache.thrift.protocol.TField LENGTH_FIELD_DESC = new org.apache.thrift.protocol.TField("length", org.apache.thrift.protocol.TType.I64, (short)3);
   private static final org.apache.thrift.protocol.TField LOCATIONS_FIELD_DESC = new org.apache.thrift.protocol.TField("locations", org.apache.thrift.protocol.TType.LIST, (short)4);
+  private static final org.apache.thrift.protocol.TField REMAPPED_LOCATIONS_FIELD_DESC = new org.apache.thrift.protocol.TField("remappedLocations", org.apache.thrift.protocol.TType.LIST, (short)5);
 
   private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
   static {
@@ -48,13 +49,15 @@ public class ClientBlockInfo implements org.apache.thrift.TBase<ClientBlockInfo,
   public long offset; // required
   public long length; // required
   public List<NetAddress> locations; // required
+  public List<NetAddress> remappedLocations; // required
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
     BLOCK_ID((short)1, "blockId"),
     OFFSET((short)2, "offset"),
     LENGTH((short)3, "length"),
-    LOCATIONS((short)4, "locations");
+    LOCATIONS((short)4, "locations"),
+    REMAPPED_LOCATIONS((short)5, "remappedLocations");
 
     private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
 
@@ -77,6 +80,8 @@ public class ClientBlockInfo implements org.apache.thrift.TBase<ClientBlockInfo,
           return LENGTH;
         case 4: // LOCATIONS
           return LOCATIONS;
+        case 5: // REMAPPED_LOCATIONS
+          return REMAPPED_LOCATIONS;
         default:
           return null;
       }
@@ -133,6 +138,9 @@ public class ClientBlockInfo implements org.apache.thrift.TBase<ClientBlockInfo,
     tmpMap.put(_Fields.LOCATIONS, new org.apache.thrift.meta_data.FieldMetaData("locations", org.apache.thrift.TFieldRequirementType.DEFAULT, 
         new org.apache.thrift.meta_data.ListMetaData(org.apache.thrift.protocol.TType.LIST, 
             new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, NetAddress.class))));
+    tmpMap.put(_Fields.REMAPPED_LOCATIONS, new org.apache.thrift.meta_data.FieldMetaData("remappedLocations", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+        new org.apache.thrift.meta_data.ListMetaData(org.apache.thrift.protocol.TType.LIST, 
+            new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, NetAddress.class))));
     metaDataMap = Collections.unmodifiableMap(tmpMap);
     org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(ClientBlockInfo.class, metaDataMap);
   }
@@ -144,7 +152,8 @@ public class ClientBlockInfo implements org.apache.thrift.TBase<ClientBlockInfo,
     long blockId,
     long offset,
     long length,
-    List<NetAddress> locations)
+    List<NetAddress> locations,
+    List<NetAddress> remappedLocations)
   {
     this();
     this.blockId = blockId;
@@ -154,6 +163,7 @@ public class ClientBlockInfo implements org.apache.thrift.TBase<ClientBlockInfo,
     this.length = length;
     setLengthIsSet(true);
     this.locations = locations;
+    this.remappedLocations = remappedLocations;
   }
 
   /**
@@ -171,6 +181,13 @@ public class ClientBlockInfo implements org.apache.thrift.TBase<ClientBlockInfo,
       }
       this.locations = __this__locations;
     }
+    if (other.isSetRemappedLocations()) {
+      List<NetAddress> __this__remappedLocations = new ArrayList<NetAddress>();
+      for (NetAddress other_element : other.remappedLocations) {
+        __this__remappedLocations.add(new NetAddress(other_element));
+      }
+      this.remappedLocations = __this__remappedLocations;
+    }
   }
 
   public ClientBlockInfo deepCopy() {
@@ -186,6 +203,7 @@ public class ClientBlockInfo implements org.apache.thrift.TBase<ClientBlockInfo,
     setLengthIsSet(false);
     this.length = 0;
     this.locations = null;
+    this.remappedLocations = null;
   }
 
   public long getBlockId() {
@@ -296,6 +314,45 @@ public class ClientBlockInfo implements org.apache.thrift.TBase<ClientBlockInfo,
     }
   }
 
+  public int getRemappedLocationsSize() {
+    return (this.remappedLocations == null) ? 0 : this.remappedLocations.size();
+  }
+
+  public java.util.Iterator<NetAddress> getRemappedLocationsIterator() {
+    return (this.remappedLocations == null) ? null : this.remappedLocations.iterator();
+  }
+
+  public void addToRemappedLocations(NetAddress elem) {
+    if (this.remappedLocations == null) {
+      this.remappedLocations = new ArrayList<NetAddress>();
+    }
+    this.remappedLocations.add(elem);
+  }
+
+  public List<NetAddress> getRemappedLocations() {
+    return this.remappedLocations;
+  }
+
+  public ClientBlockInfo setRemappedLocations(List<NetAddress> remappedLocations) {
+    this.remappedLocations = remappedLocations;
+    return this;
+  }
+
+  public void unsetRemappedLocations() {
+    this.remappedLocations = null;
+  }
+
+  /** Returns true if field remappedLocations is set (has been assigned a value) and false otherwise */
+  public boolean isSetRemappedLocations() {
+    return this.remappedLocations != null;
+  }
+
+  public void setRemappedLocationsIsSet(boolean value) {
+    if (!value) {
+      this.remappedLocations = null;
+    }
+  }
+
   public void setFieldValue(_Fields field, Object value) {
     switch (field) {
     case BLOCK_ID:
@@ -330,6 +387,14 @@ public class ClientBlockInfo implements org.apache.thrift.TBase<ClientBlockInfo,
       }
       break;
 
+    case REMAPPED_LOCATIONS:
+      if (value == null) {
+        unsetRemappedLocations();
+      } else {
+        setRemappedLocations((List<NetAddress>)value);
+      }
+      break;
+
     }
   }
 
@@ -346,6 +411,9 @@ public class ClientBlockInfo implements org.apache.thrift.TBase<ClientBlockInfo,
 
     case LOCATIONS:
       return getLocations();
+
+    case REMAPPED_LOCATIONS:
+      return getRemappedLocations();
 
     }
     throw new IllegalStateException();
@@ -366,6 +434,8 @@ public class ClientBlockInfo implements org.apache.thrift.TBase<ClientBlockInfo,
       return isSetLength();
     case LOCATIONS:
       return isSetLocations();
+    case REMAPPED_LOCATIONS:
+      return isSetRemappedLocations();
     }
     throw new IllegalStateException();
   }
@@ -416,6 +486,15 @@ public class ClientBlockInfo implements org.apache.thrift.TBase<ClientBlockInfo,
       if (!(this_present_locations && that_present_locations))
         return false;
       if (!this.locations.equals(that.locations))
+        return false;
+    }
+
+    boolean this_present_remappedLocations = true && this.isSetRemappedLocations();
+    boolean that_present_remappedLocations = true && that.isSetRemappedLocations();
+    if (this_present_remappedLocations || that_present_remappedLocations) {
+      if (!(this_present_remappedLocations && that_present_remappedLocations))
+        return false;
+      if (!this.remappedLocations.equals(that.remappedLocations))
         return false;
     }
 
@@ -475,6 +554,16 @@ public class ClientBlockInfo implements org.apache.thrift.TBase<ClientBlockInfo,
         return lastComparison;
       }
     }
+    lastComparison = Boolean.valueOf(isSetRemappedLocations()).compareTo(typedOther.isSetRemappedLocations());
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+    if (isSetRemappedLocations()) {
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.remappedLocations, typedOther.remappedLocations);
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+    }
     return 0;
   }
 
@@ -512,6 +601,14 @@ public class ClientBlockInfo implements org.apache.thrift.TBase<ClientBlockInfo,
       sb.append("null");
     } else {
       sb.append(this.locations);
+    }
+    first = false;
+    if (!first) sb.append(", ");
+    sb.append("remappedLocations:");
+    if (this.remappedLocations == null) {
+      sb.append("null");
+    } else {
+      sb.append(this.remappedLocations);
     }
     first = false;
     sb.append(")");
@@ -602,6 +699,25 @@ public class ClientBlockInfo implements org.apache.thrift.TBase<ClientBlockInfo,
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
+          case 5: // REMAPPED_LOCATIONS
+            if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
+              {
+                org.apache.thrift.protocol.TList _list3 = iprot.readListBegin();
+                struct.remappedLocations = new ArrayList<NetAddress>(_list3.size);
+                for (int _i4 = 0; _i4 < _list3.size; ++_i4)
+                {
+                  NetAddress _elem5; // required
+                  _elem5 = new NetAddress();
+                  _elem5.read(iprot);
+                  struct.remappedLocations.add(_elem5);
+                }
+                iprot.readListEnd();
+              }
+              struct.setRemappedLocationsIsSet(true);
+            } else { 
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+            }
+            break;
           default:
             org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
         }
@@ -630,9 +746,21 @@ public class ClientBlockInfo implements org.apache.thrift.TBase<ClientBlockInfo,
         oprot.writeFieldBegin(LOCATIONS_FIELD_DESC);
         {
           oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, struct.locations.size()));
-          for (NetAddress _iter3 : struct.locations)
+          for (NetAddress _iter6 : struct.locations)
           {
-            _iter3.write(oprot);
+            _iter6.write(oprot);
+          }
+          oprot.writeListEnd();
+        }
+        oprot.writeFieldEnd();
+      }
+      if (struct.remappedLocations != null) {
+        oprot.writeFieldBegin(REMAPPED_LOCATIONS_FIELD_DESC);
+        {
+          oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, struct.remappedLocations.size()));
+          for (NetAddress _iter7 : struct.remappedLocations)
+          {
+            _iter7.write(oprot);
           }
           oprot.writeListEnd();
         }
@@ -668,7 +796,10 @@ public class ClientBlockInfo implements org.apache.thrift.TBase<ClientBlockInfo,
       if (struct.isSetLocations()) {
         optionals.set(3);
       }
-      oprot.writeBitSet(optionals, 4);
+      if (struct.isSetRemappedLocations()) {
+        optionals.set(4);
+      }
+      oprot.writeBitSet(optionals, 5);
       if (struct.isSetBlockId()) {
         oprot.writeI64(struct.blockId);
       }
@@ -681,9 +812,18 @@ public class ClientBlockInfo implements org.apache.thrift.TBase<ClientBlockInfo,
       if (struct.isSetLocations()) {
         {
           oprot.writeI32(struct.locations.size());
-          for (NetAddress _iter4 : struct.locations)
+          for (NetAddress _iter8 : struct.locations)
           {
-            _iter4.write(oprot);
+            _iter8.write(oprot);
+          }
+        }
+      }
+      if (struct.isSetRemappedLocations()) {
+        {
+          oprot.writeI32(struct.remappedLocations.size());
+          for (NetAddress _iter9 : struct.remappedLocations)
+          {
+            _iter9.write(oprot);
           }
         }
       }
@@ -692,7 +832,7 @@ public class ClientBlockInfo implements org.apache.thrift.TBase<ClientBlockInfo,
     @Override
     public void read(org.apache.thrift.protocol.TProtocol prot, ClientBlockInfo struct) throws org.apache.thrift.TException {
       TTupleProtocol iprot = (TTupleProtocol) prot;
-      BitSet incoming = iprot.readBitSet(4);
+      BitSet incoming = iprot.readBitSet(5);
       if (incoming.get(0)) {
         struct.blockId = iprot.readI64();
         struct.setBlockIdIsSet(true);
@@ -707,17 +847,31 @@ public class ClientBlockInfo implements org.apache.thrift.TBase<ClientBlockInfo,
       }
       if (incoming.get(3)) {
         {
-          org.apache.thrift.protocol.TList _list5 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
-          struct.locations = new ArrayList<NetAddress>(_list5.size);
-          for (int _i6 = 0; _i6 < _list5.size; ++_i6)
+          org.apache.thrift.protocol.TList _list10 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
+          struct.locations = new ArrayList<NetAddress>(_list10.size);
+          for (int _i11 = 0; _i11 < _list10.size; ++_i11)
           {
-            NetAddress _elem7; // required
-            _elem7 = new NetAddress();
-            _elem7.read(iprot);
-            struct.locations.add(_elem7);
+            NetAddress _elem12; // required
+            _elem12 = new NetAddress();
+            _elem12.read(iprot);
+            struct.locations.add(_elem12);
           }
         }
         struct.setLocationsIsSet(true);
+      }
+      if (incoming.get(4)) {
+        {
+          org.apache.thrift.protocol.TList _list13 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
+          struct.remappedLocations = new ArrayList<NetAddress>(_list13.size);
+          for (int _i14 = 0; _i14 < _list13.size; ++_i14)
+          {
+            NetAddress _elem15; // required
+            _elem15 = new NetAddress();
+            _elem15.read(iprot);
+            struct.remappedLocations.add(_elem15);
+          }
+        }
+        struct.setRemappedLocationsIsSet(true);
       }
     }
   }

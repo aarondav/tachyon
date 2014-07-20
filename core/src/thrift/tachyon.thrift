@@ -13,6 +13,7 @@ struct ClientBlockInfo {
   2: i64 offset
   3: i64 length
   4: list<NetAddress> locations
+  5: list<NetAddress> remappedLocations
 }
 
 struct ClientWorkerInfo {

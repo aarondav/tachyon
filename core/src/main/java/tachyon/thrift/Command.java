@@ -440,13 +440,13 @@ public class Command implements org.apache.thrift.TBase<Command, Command._Fields
           case 2: // M_DATA
             if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
               {
-                org.apache.thrift.protocol.TList _list40 = iprot.readListBegin();
-                struct.mData = new ArrayList<Long>(_list40.size);
-                for (int _i41 = 0; _i41 < _list40.size; ++_i41)
+                org.apache.thrift.protocol.TList _list48 = iprot.readListBegin();
+                struct.mData = new ArrayList<Long>(_list48.size);
+                for (int _i49 = 0; _i49 < _list48.size; ++_i49)
                 {
-                  long _elem42; // required
-                  _elem42 = iprot.readI64();
-                  struct.mData.add(_elem42);
+                  long _elem50; // required
+                  _elem50 = iprot.readI64();
+                  struct.mData.add(_elem50);
                 }
                 iprot.readListEnd();
               }
@@ -479,9 +479,9 @@ public class Command implements org.apache.thrift.TBase<Command, Command._Fields
         oprot.writeFieldBegin(M_DATA_FIELD_DESC);
         {
           oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.I64, struct.mData.size()));
-          for (long _iter43 : struct.mData)
+          for (long _iter51 : struct.mData)
           {
-            oprot.writeI64(_iter43);
+            oprot.writeI64(_iter51);
           }
           oprot.writeListEnd();
         }
@@ -518,9 +518,9 @@ public class Command implements org.apache.thrift.TBase<Command, Command._Fields
       if (struct.isSetMData()) {
         {
           oprot.writeI32(struct.mData.size());
-          for (long _iter44 : struct.mData)
+          for (long _iter52 : struct.mData)
           {
-            oprot.writeI64(_iter44);
+            oprot.writeI64(_iter52);
           }
         }
       }
@@ -536,13 +536,13 @@ public class Command implements org.apache.thrift.TBase<Command, Command._Fields
       }
       if (incoming.get(1)) {
         {
-          org.apache.thrift.protocol.TList _list45 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.I64, iprot.readI32());
-          struct.mData = new ArrayList<Long>(_list45.size);
-          for (int _i46 = 0; _i46 < _list45.size; ++_i46)
+          org.apache.thrift.protocol.TList _list53 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.I64, iprot.readI32());
+          struct.mData = new ArrayList<Long>(_list53.size);
+          for (int _i54 = 0; _i54 < _list53.size; ++_i54)
           {
-            long _elem47; // required
-            _elem47 = iprot.readI64();
-            struct.mData.add(_elem47);
+            long _elem55; // required
+            _elem55 = iprot.readI64();
+            struct.mData.add(_elem55);
           }
         }
         struct.setMDataIsSet(true);

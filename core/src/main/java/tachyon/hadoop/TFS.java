@@ -216,6 +216,10 @@ public class TFS extends FileSystem {
           names.add(addr.mHost);
           hosts.add(addr.mHost);
         }
+        for (NetAddress addr : info.getRemappedLocations()) {
+          names.add(addr.mHost);
+          hosts.add(addr.mHost);
+        }
         blockLocations.add(new BlockLocation(CommonUtils.toStringArray(names), CommonUtils
             .toStringArray(hosts), offset, info.getLength()));
       }

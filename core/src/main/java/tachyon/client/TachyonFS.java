@@ -385,7 +385,7 @@ public class TachyonFS {
     File ret = new File(mUserTempFolder);
 
     if (!ret.exists()) {
-      if (ret.mkdir()) {
+      if (ret.mkdirs()) {
         CommonUtils.changeLocalFileToFullPermission(ret.getAbsolutePath());
         LOG.info("Folder " + ret + " was created!");
       } else {

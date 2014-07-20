@@ -89,6 +89,7 @@ public class BlockInfo {
     ret.offset = OFFSET;
     ret.length = LENGTH;
     ret.locations = getLocations();
+    ret.remappedLocations = getRemappedLocations();
 
     return ret;
   }
@@ -105,17 +106,21 @@ public class BlockInfo {
     return INODE_FILE;
   }
 
-  public synchronized List<NetAddress> getLocations() {
+  public synchronized List<NetAddress> getRemappedLocations() {
     List<NetAddress> ret = new ArrayList<NetAddress>(mLocations.size());
-    ret.addAll(mLocations.values());
     for (NetAddress loc: mLocations.values()) {
-      ret.add(loc);
       if (mRemapping.containsKey(loc)) {
-        for (String host: mRemapping.get(loc)) {
+        for (String host : mRemapping.get(loc)) {
           ret.add(new NetAddress(host, loc.getMPort()));
         }
       }
     }
+    return ret;
+  }
+
+  public synchronized List<NetAddress> getLocations() {
+    List<NetAddress> ret = new ArrayList<NetAddress>(mLocations.size());
+    ret.addAll(mLocations.values());
     if (ret.isEmpty() && INODE_FILE.hasCheckpointed()) {
       UnderFileSystem ufs = UnderFileSystem.get(INODE_FILE.getUfsPath());
       List<String> locs = null;
