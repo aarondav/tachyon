@@ -869,7 +869,7 @@ public class MasterInfo extends ImageWriter {
       InetSocketAddress address = tWorkerInfo.ADDRESS;
       NetAddress netAddress = new NetAddress(address.getAddress().getCanonicalHostName(), address.getPort());
       List<String> remappings = mWorkerAddressToRemappings.get(netAddress);
-      LOG.info("Using remapping from " + netAddress + " => " + remappings);
+      LOG.debug("Using remapping from " + netAddress + " => " + remappings);
       tFile.addLocation(blockIndex, workerId, netAddress, remappings);
 
       if (tFile.hasCheckpointed()) {

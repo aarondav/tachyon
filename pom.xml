@@ -19,7 +19,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>edu.berkeley.cs.amplab</groupId>
   <artifactId>tachyon-parent</artifactId>
-  <version>0.5.0.12-internal-SNAPSHOT</version>
+  <version>0.5.0-0</version>
   <packaging>pom</packaging>
   <description>Tachyon Project Parent</description>
   <name>Tachyon Project Parent</name>

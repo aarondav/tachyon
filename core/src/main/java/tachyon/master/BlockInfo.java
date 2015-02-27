@@ -141,7 +141,7 @@ public class BlockInfo {
         }
       }
     }
-    LOG.info("Returning BlockLocations of " + ret + " given raw locations " + mLocations.values());
+    LOG.debug("Returning BlockLocations of " + ret + " given raw locations " + mLocations.values());
     return ret;
   }
 
